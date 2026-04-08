@@ -18,6 +18,10 @@ public class ButtonScript : MonoBehaviour
         {
             ConnectedObj.GetComponent<DoorScript>().open = pressed;
         }
+        if (ConnectedObj.GetComponent<PasWallScript>())
+        {
+            ConnectedObj.GetComponent<PasWallScript>().canPass = pressed;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

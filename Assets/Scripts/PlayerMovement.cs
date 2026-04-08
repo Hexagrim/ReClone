@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        isGrounded = Physics2D.OverlapBox(groundCheck.position, new Vector2(groundCheckRadius - 0.05f, groundCheckRadius),0, groundLayer);
 
         Anim.SetBool("isJumping", !isGrounded);
 
@@ -59,23 +59,15 @@ public class PlayerMovement : MonoBehaviour
             rb.gravityScale = 4f;
         }
 
+        var emissionRight = dustRight.emission;
+        var emissionLeft = dustLeft.emission;
 
-        if (replaySystem.inputRight && isGrounded)
-        {
-            dustRight.Play();
-            dustLeft.Stop();
-        }
-        else if (replaySystem.inputLeft && isGrounded)
-        {
-            dustLeft.Play();
-            dustRight.Stop();
-        }
+        bool shouldPlayRight = rb.linearVelocityX > 1 && isGrounded;
+        bool shouldPlayLeft = rb.linearVelocityX < -1 && isGrounded;
 
-        else
-        {
-            dustLeft.Stop();
-            dustRight.Stop();
-        }
+        emissionRight.enabled = shouldPlayRight;
+        emissionLeft.enabled = shouldPlayLeft;
+
     }
 
     private void FixedUpdate()
@@ -104,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
         if (groundCheck == null) return;
 
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+        Gizmos.DrawWireCube(groundCheck.position, new Vector2(groundCheckRadius - 0.05f , groundCheckRadius));
     }
 
 }
