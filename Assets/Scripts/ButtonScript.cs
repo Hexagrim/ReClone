@@ -14,6 +14,10 @@ public class ButtonScript : MonoBehaviour
     void Update()
     {
         Anim.SetBool("pressed", pressed);
+        if (ConnectedObj.GetComponent<DoorScript>())
+        {
+            ConnectedObj.GetComponent<DoorScript>().open = pressed;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

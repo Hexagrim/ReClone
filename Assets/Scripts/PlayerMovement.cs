@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
     public float speed;
     public float jumpSpeed;
 
+    public ParticleSystem dustLeft, dustRight;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundCheckRadius = 0.1f;
     [SerializeField] private LayerMask groundLayer;
@@ -56,6 +57,24 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             rb.gravityScale = 4f;
+        }
+
+
+        if (replaySystem.inputRight && isGrounded)
+        {
+            dustRight.Play();
+            dustLeft.Stop();
+        }
+        else if (replaySystem.inputLeft && isGrounded)
+        {
+            dustLeft.Play();
+            dustRight.Stop();
+        }
+
+        else
+        {
+            dustLeft.Stop();
+            dustRight.Stop();
         }
     }
 
