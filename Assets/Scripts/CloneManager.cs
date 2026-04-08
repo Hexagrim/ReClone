@@ -11,12 +11,14 @@ public class CloneManager : MonoBehaviour
     {
         spawnPoint = transform.position;
     }
+
+    //super simple code lmao
     void Update()
     {
         maxClonesText.text = (GetComponent<PlayerCloneScript>().maxClone - GetComponent<PlayerCloneScript>().numOfClone).ToString();
         if (GetComponent<PlayerCloneScript>().maxClone <= GetComponent<PlayerCloneScript>().numOfClone) return;
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.C))
         {
             transform.position = spawnPoint;
             FindFirstObjectByType<ResetRigidBodies>().ResetAll();

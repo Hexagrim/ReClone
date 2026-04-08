@@ -6,6 +6,7 @@ public class ButtonScript : MonoBehaviour
     public GameObject ConnectedObj;
 
     public bool pressed;
+    int pressedObjs;
     void Start()
     {
         Anim = GetComponent<Animator>();
@@ -22,20 +23,31 @@ public class ButtonScript : MonoBehaviour
         {
             ConnectedObj.GetComponent<PasWallScript>().canPass = pressed;
         }
+
+
+        if(pressedObjs <= 0)
+        {
+            pressedObjs = 0;
+            pressed = false;
+        }
+        else
+        {
+            pressed = true;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Player") || collision.CompareTag("Clone"))
         {
-            pressed = true;
+            pressedObjs++;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") || collision.CompareTag("Clone"))
         {
-            pressed = false;
+            pressedObjs--;
         }
     }
 }
