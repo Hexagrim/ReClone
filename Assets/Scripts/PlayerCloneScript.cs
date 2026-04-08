@@ -4,6 +4,7 @@ using UnityEngine;
 [System.Serializable]
 public struct PlayerInputFrame
 {
+
     public bool left;
     public bool right;
     public bool jump;
@@ -19,8 +20,9 @@ public struct PlayerInputFrame
 public class PlayerCloneScript: MonoBehaviour
 {
     public bool isClone = false;
-
-    private List<PlayerInputFrame> recordedInputs = new List<PlayerInputFrame>();
+    public int maxClone;
+    public int numOfClone;
+    public List<PlayerInputFrame> recordedInputs = new List<PlayerInputFrame>();
     private int replayIndex = 0;
     private bool isReplaying = false;
     public bool inputLeft;
@@ -77,6 +79,12 @@ public class PlayerCloneScript: MonoBehaviour
         recordedInputs = new List<PlayerInputFrame>(data);
         replayIndex = 0;
         isReplaying = true;
+    }
+    public void ResetRecording()
+    {
+        recordedInputs.Clear();
+        replayIndex = 0;
+        isReplaying = false;
     }
     public List<PlayerInputFrame> GetRecording() => recordedInputs;
 }
