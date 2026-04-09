@@ -1,16 +1,24 @@
 using UnityEngine;
+using UnityEditor;
 
-public class LineRendererFix : MonoBehaviour
+public class LineRendererFix
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [MenuItem("Tools/Fix lineRenderer z to zero")]
+    static void FixZ()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        LineRenderer[] lines = Object.FindObjectsByType<LineRenderer>(FindObjectsSortMode.None);
+        foreach (LineRenderer lr in lines)
+        {
+            int count = lr.positionCount;
+            Vector3[] positions = new Vector3[count];
+            lr.GetPositions(positions);
+            for (int i = 0; i < count; i++)
+            {
+                positions[i].z = 0f;
+            }
+            lr.SetPositions(positions);
+            EditorUtility.SetDirty(lr);
+        }
+        Debug.Log("all lineRenderer z position set to zero");
     }
 }
