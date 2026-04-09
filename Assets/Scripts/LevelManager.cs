@@ -28,7 +28,7 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    void NextLvl()
+    public void NextLvl()
     {
         StartCoroutine(LoadScene(NextLevel));
     }

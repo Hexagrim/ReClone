@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
@@ -13,18 +14,20 @@ public class MainMenu : MonoBehaviour
         
     }
 
-    void Quit()
+    public void Quit()
     {
         Application.Quit();
     }
 
-    void Play()
+    public void Play()
     {
-        StartCoroutine(Transition());
+        StartCoroutine(Transition("Level1"));
     }
 
-    IEnumerator Transition()
+    IEnumerator Transition(string lvlName)
     {
-        Anim.SetTrigger("Levels");
+        Anim.SetTrigger("fadeOut");
+        yield return new WaitForSeconds(0.3f);
+        SceneManager.LoadSceneAsync(lvlName);
     }
 }
