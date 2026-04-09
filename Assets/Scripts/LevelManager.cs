@@ -35,6 +35,7 @@ public class LevelManager : MonoBehaviour
 
     IEnumerator LoadScene(string name)
     {
+
         FindFirstObjectByType<PlayerCloneScript>().enabled = false;
         FindFirstObjectByType<PlayerCloneScript>().gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         changingScene = true;

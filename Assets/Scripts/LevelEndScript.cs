@@ -23,6 +23,7 @@ public class LevelEndScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             ended = true;
+            FindFirstObjectByType<AudioManager>().PlaySFX(FindFirstObjectByType<AudioManager>().lvlEnd);
             LevelManager.NextLvl();
             StartCoroutine(LerpPosition(Player.transform.position,transform.position));
 

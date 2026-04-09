@@ -21,6 +21,7 @@ public class CloneManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.C))
         {
             transform.position = spawnPoint;
+            FindFirstObjectByType<AudioManager>().PlaySFX(FindFirstObjectByType<AudioManager>().clone);
             FindFirstObjectByType<ResetRigidBodies>().ResetAll();
             GameObject clone = Instantiate(clonePrefab, spawnPoint, Quaternion.identity);
             var data = GetComponent<PlayerCloneScript>().GetRecording();

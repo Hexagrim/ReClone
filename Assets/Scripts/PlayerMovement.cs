@@ -47,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.linearVelocityY = jumpSpeed;
             Anim.SetTrigger("takeOff");
+            if (!replaySystem.isClone) FindFirstObjectByType<AudioManager>().PlaySFX(FindFirstObjectByType<AudioManager>().jump);
         }
 
 
