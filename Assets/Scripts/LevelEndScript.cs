@@ -4,7 +4,7 @@ public class LevelEndScript : MonoBehaviour
 {
     public LevelManager LevelManager;
     public GameObject Player;
-
+    public int Lvl;
     bool ended;
     void Start()
     {
@@ -23,6 +23,8 @@ public class LevelEndScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             ended = true;
+            PlayerPrefs.SetInt("maxLvl", Lvl);
+            PlayerPrefs.Save();
             FindFirstObjectByType<AudioManager>().PlaySFX(FindFirstObjectByType<AudioManager>().lvlEnd);
             LevelManager.NextLvl();
             StartCoroutine(LerpPosition(Player.transform.position,transform.position));
