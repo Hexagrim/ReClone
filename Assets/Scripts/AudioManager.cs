@@ -38,16 +38,8 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySFX(AudioClip sfx)
     {
-        if (!canPlaySfx) return;
-        StartCoroutine(SfxWithDelay(sfx));
-    }
-
-    IEnumerator SfxWithDelay(AudioClip sfx)
-    {
         Sfx.pitch = Random.Range(0.8f, 1.2f);
         Sfx.PlayOneShot(sfx);
-        canPlaySfx = false;
-        yield return new WaitForSeconds(0.01f);
-        canPlaySfx = true;
     }
+
 }
